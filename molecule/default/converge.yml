@@ -7,11 +7,13 @@
   pre_tasks:
     - name: Install cron (RedHat).
       ansible.builtin.dnf:
+        name: cron
         state: present
       when: ansible_os_family == 'RedHat'
 
     - name: Install cron (Debian).
       ansible.builtin.apt:
+        name: cron
         state: present
       when: ansible_distribution == 'Debian'
 

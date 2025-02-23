@@ -19,13 +19,13 @@
   pre_tasks:
     - name: Install ansible.builtin.cron (RedHat).
       ansible.builtin.dnf:
-        name: ansible.builtin.cronie
+        name: cronie
         state: present
       when: ansible_os_family == 'RedHat'
 
     - name: Install ansible.builtin.cron (Debian).
       ansible.builtin.apt:
-        name: ansible.builtin.cron
+        name: cron
         state: present
       when: ansible_distribution == 'Debian'
 
