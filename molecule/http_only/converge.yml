@@ -17,31 +17,31 @@
         letsencrypt: false
 
   pre_tasks:
-    - name: Install cron (RedHat).
-      yum:
-        name: cronie
+    - name: Install ansible.builtin.cron (RedHat).
+      ansible.builtin.dnf:
+        name: ansible.builtin.cronie
         state: present
       when: ansible_os_family == 'RedHat'
 
-    - name: Install cron (Debian).
-      apt:
-        name: cron
+    - name: Install ansible.builtin.cron (Debian).
+      ansible.builtin.apt:
+        name: ansible.builtin.cron
         state: present
       when: ansible_distribution == 'Debian'
 
-    - name: Update apt cache.
-      apt:
+    - name: Update ansible.builtin.apt cache.
+      ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 600
       when: ansible_distribution == 'Ubuntu'
 
     - name: Enable certbot-auto on Ubuntu 16.04
-      set_fact:
+      ansible.builtin.set_fact:
         nginx_revproxy_certbot_auto: true
       when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version == '16'
 
     - name: Enable certbot-auto on Debian 9
-      set_fact:
+      ansible.builtin.set_fact:
         nginx_revproxy_certbot_auto: true
       when: ansible_distribution == 'Debian' and ansible_distribution_major_version == '9'
 
