@@ -5,19 +5,17 @@
   become: true
 
   pre_tasks:
-    - name: Install ansible.builtin.cron (RedHat).
+    - name: Install cron (RedHat).
       ansible.builtin.dnf:
-        name: ansible.builtin.cronie
         state: present
       when: ansible_os_family == 'RedHat'
 
-    - name: Install ansible.builtin.cron (Debian).
+    - name: Install cron (Debian).
       ansible.builtin.apt:
-        name: ansible.builtin.cron
         state: present
       when: ansible_distribution == 'Debian'
 
-    - name: Update ansible.builtin.apt cache.
+    - name: Update apt cache.
       ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 600
