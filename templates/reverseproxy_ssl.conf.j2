@@ -120,6 +120,10 @@ server {
       auth_basic "Restricted Content";
       auth_basic_user_file /etc/nginx/{{ item.key }}_htpasswd;
 {% endif %}
+      # Fix 502 bad gateway
+      proxy_buffer_size          256k;
+      proxy_buffers              4 256k;
+      proxy_busy_buffers_size     256k;
    }
 
 {% if item.value.extra_locations is defined %}
@@ -136,6 +140,11 @@ server {
 {% endif %}
       proxy_set_header        Host $http_host;
       proxy_set_header        X-Real-IP $remote_addr;
+
+      # Fix 502 bad gateway
+      proxy_buffer_size          256k;
+      proxy_buffers              4 256k;
+      proxy_busy_buffers_size     256k;
    }
 
 {% endfor %}
